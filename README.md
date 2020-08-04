@@ -1,6 +1,8 @@
 # HttpRequester
 自定义网络访问框架
 
+## Android架构师全套视频获取：
+
 1、百度网盘：链接：https://pan.baidu.com/s/1GBHi4SgodTzuBa5haeD2_Q
 
 提取码：eh4b
