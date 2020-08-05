@@ -9,6 +9,12 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="downloadFile"
+        android:text="下载文件" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="fetchData"
         android:text="获取数据" />
 
