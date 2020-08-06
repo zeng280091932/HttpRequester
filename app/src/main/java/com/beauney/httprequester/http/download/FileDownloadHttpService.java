@@ -107,7 +107,7 @@ public class FileDownloadHttpService implements IDownloadService {
         @Override
         public String handleResponse(HttpResponse response) throws IOException {
             int code = response.getStatusLine().getStatusCode();
-            if (code == 200) {
+            if (code == 200 || code == 206) {
                 mHttpListener.onSuccess(response.getEntity());
             } else {
                 mHttpListener.onFail(new HttpRequestFailedException(code));

@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onDownloadError(DownloadItemInfo downloadItemInfo, int var2, String var3) {
+            public void onDownloadError(DownloadItemInfo downloadItemInfo, int code, String reason) {
 
             }
         });

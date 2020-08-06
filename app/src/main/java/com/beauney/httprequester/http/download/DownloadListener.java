@@ -72,7 +72,10 @@ public class DownloadListener implements IDownloadListener {
 
     @Override
     public void addHttpHeader(Map<String, String> headerMap) {
-
+        long length = getFile().length();
+        if (length > 0L) {
+            headerMap.put("RANGE", "bytes=" + length + "-");
+        }
     }
 
     @Override
@@ -104,7 +107,7 @@ public class DownloadListener implements IDownloadListener {
         this.receiveTotalLength(totalLength);
         //更新状态
         this.downloadStatusChange(DownloadStatus.downloading);
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[512];
         int count = 0;
         long currentTime = System.currentTimeMillis();
         BufferedOutputStream bos = null;
