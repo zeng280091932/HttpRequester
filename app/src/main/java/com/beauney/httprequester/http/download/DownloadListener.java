@@ -3,6 +3,7 @@ package com.beauney.httprequester.http.download;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.beauney.httprequester.http.download.enums.DownloadStatus;
 import com.beauney.httprequester.http.download.interfaces.IDownloadListener;
 import com.beauney.httprequester.http.download.interfaces.IDownloadService;
 import com.beauney.httprequester.http.download.interfaces.IDownloadServiceCallable;
@@ -156,7 +157,7 @@ public class DownloadListener implements IDownloadListener {
             }
         } catch (Exception e) {
             if (this.getDownloadService() != null) {
-//                this.getHttpService().abortRequest();
+                this.getDownloadService().abortRequest();
             }
         } finally {
             try {
@@ -186,7 +187,7 @@ public class DownloadListener implements IDownloadListener {
 
 
     private void downloadLengthChange(final long downLength, final long totalLength, final long speed) {
-        mDownloadItemInfo.setCurrentLength(downLength);
+        mDownloadItemInfo.setCurrentLen(downLength);
         if (mDownloadServiceCallable != null) {
             final DownloadItemInfo downloadItemInfo = mDownloadItemInfo.copy();
             synchronized (mLock) {
@@ -206,7 +207,7 @@ public class DownloadListener implements IDownloadListener {
      * @param downloading
      */
     private void downloadStatusChange(DownloadStatus downloading) {
-        mDownloadItemInfo.setDownloadStatus(downloading);
+        mDownloadItemInfo.setStatus(downloading.getValue());
         final DownloadItemInfo copyDownloadItemInfo = mDownloadItemInfo.copy();
         if (mDownloadServiceCallable != null) {
             synchronized (mLock) {
@@ -226,7 +227,7 @@ public class DownloadListener implements IDownloadListener {
      * @param totalLength
      */
     private void receiveTotalLength(long totalLength) {
-        mDownloadItemInfo.setCurrentLength(totalLength);
+        mDownloadItemInfo.setCurrentLen(totalLength);
         final DownloadItemInfo copyDownloadItemInfo = mDownloadItemInfo.copy();
         if (mDownloadServiceCallable != null) {
             synchronized (mLock) {

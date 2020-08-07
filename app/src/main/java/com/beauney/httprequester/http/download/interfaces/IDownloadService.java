@@ -18,4 +18,6 @@ public interface IDownloadService extends IHttpService {
     boolean isCancel();
 
     boolean isPause();
+
+    void abortRequest();
 }

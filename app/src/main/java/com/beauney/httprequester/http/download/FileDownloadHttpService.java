@@ -5,9 +5,7 @@ import android.util.Log;
 import com.beauney.httprequester.http.download.interfaces.IDownloadService;
 import com.beauney.httprequester.http.exception.HttpRequestFailedException;
 import com.beauney.httprequester.http.interfaces.IHttpListener;
-import com.beauney.httprequester.http.service.JsonHttpService;
 
-import org.apache.http.HttpClientConnection;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -19,6 +17,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @author zengjiantao
@@ -42,9 +41,14 @@ public class FileDownloadHttpService implements IDownloadService {
 
     private HttpResponseHandler mHttpResponseHandler = new HttpResponseHandler();
 
+    /**
+     * 判断是否暂停
+     */
+    private AtomicBoolean mPause = new AtomicBoolean(false);
+
     @Override
     public void pause() {
-
+        mPause.compareAndSet(false, true);
     }
 
     @Override
@@ -64,7 +68,7 @@ public class FileDownloadHttpService implements IDownloadService {
 
     @Override
     public boolean isPause() {
-        return false;
+        return mPause.get();
     }
 
     @Override
@@ -92,6 +96,11 @@ public class FileDownloadHttpService implements IDownloadService {
     @Override
     public void setHttpListener(IHttpListener httpListener) {
         mHttpListener = httpListener;
+    }
+
+    @Override
+    public void abortRequest(){
+        mHttpGet.abort();
     }
 
     private void constructHeader() {

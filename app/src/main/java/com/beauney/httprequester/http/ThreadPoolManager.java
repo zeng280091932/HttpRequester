@@ -35,6 +35,19 @@ public class ThreadPoolManager {
         mTaskQueue.put(futureTask);
     }
 
+    public <T> boolean removeTask(FutureTask futureTask) {
+        boolean result = false;
+        /**
+         * 阻塞式队列是否含有线程
+         */
+        if (mTaskQueue.contains(futureTask)) {
+            mTaskQueue.remove(futureTask);
+        } else {
+            result = mThreadPoolExecutor.remove(futureTask);
+        }
+        return result;
+    }
+
     private Runnable mRunnable = new Runnable() {
         @Override
         public void run() {

@@ -15,6 +15,12 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="pause"
+        android:text="暂停文件" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="fetchData"
         android:text="获取数据" />
 

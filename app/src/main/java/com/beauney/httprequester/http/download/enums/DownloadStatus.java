@@ -1,4 +1,4 @@
-package com.beauney.httprequester.http.download;
+package com.beauney.httprequester.http.download.enums;
 
 /**
  * @author zengjiantao

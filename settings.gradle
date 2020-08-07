@@ -1,2 +1,2 @@
 rootProject.name='HttpRequester'
-include ':app'
+include ':app', ':objectdb'
